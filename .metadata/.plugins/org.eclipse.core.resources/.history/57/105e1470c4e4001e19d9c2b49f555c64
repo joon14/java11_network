@@ -1,0 +1,23 @@
+package sec3;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+
+public class MyServer {
+	public static void main(String[] args) {
+		BufferedReader in = null;	//읽기 스트림
+		PrintWriter out = null;		//쓰기 스트림
+		
+		ServerSocket server = null;
+		
+		try {
+			server = new ServerSocket(6000);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+}

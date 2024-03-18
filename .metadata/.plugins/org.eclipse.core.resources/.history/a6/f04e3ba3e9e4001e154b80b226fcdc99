@@ -1,0 +1,25 @@
+package sec2;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class MultiServer {
+	public static void main(String[] args) {
+		/* public void start(){} 라고 한 경우,
+		MultiServer multi = new MultiServer();
+		multi.start();
+		*/
+		start();
+	}
+	
+	public static void start() {
+		ServerSocket server = null;
+		Socket socket = null;
+		try {
+			server = new ServerSocket(8000);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

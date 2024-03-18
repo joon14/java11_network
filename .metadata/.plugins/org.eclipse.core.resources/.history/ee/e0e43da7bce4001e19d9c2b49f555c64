@@ -1,0 +1,7 @@
+package sec2;
+//Thread(쓰레드) = Process(프로세스) = 현재 컴퓨터에서 시행 중인 프로그램(작업) 
+public class ThreadExam1 {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	}
+}

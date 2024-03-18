@@ -1,0 +1,15 @@
+package sec1;
+
+public class SystemExam1 {
+	public static void main(String[] args) {
+		//현재 자바 설치 버전 출력
+		
+		//자바 클래스 경로 출력
+		
+		//운영체제 이름
+		
+		//사용자 계정
+		
+		//현재 디렉토리
+	}
+}

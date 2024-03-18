@@ -1,0 +1,12 @@
+package sec1;
+
+class ManagerLogin {	//관리자 창
+	public ManagerLogin() {
+		
+	}
+}
+public class GUIServer {
+	public static void main(String[] args) {
+		new ManagerLogin();
+	}
+}

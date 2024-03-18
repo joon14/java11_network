@@ -1,0 +1,32 @@
+package sec2;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+public class MultiClient {
+	Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) {
+		MultiClient client = new MultiClient();
+		client.start();
+	}
+	
+	public void start() {
+		Socket socket = null;
+		BufferedReader in = null;
+		
+		try {
+			socket = new Socket("127.0.0.1", 8000);
+			System.out.println("[서버 연결 완료]");
+			
+			System.out.print("사용자 명 입력 : ");
+			String name = sc.nextLine();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
