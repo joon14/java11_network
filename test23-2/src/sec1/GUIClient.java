@@ -20,16 +20,13 @@ class LoginGUI extends JFrame implements ActionListener {
 	JLabel IPAddress_Label = new JLabel("주소 입력");
 	JButton Login_GUI_Button = new JButton("접속!");
 	
-	JButton port_btn = new JButton("     접속     ");
-	
 	public LoginGUI() {
 		setTitle("로그인 화면");
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(300,230);
-		setVisible(true);
+		setLocationRelativeTo(null);
+		setSize(300, 300);
 		setResizable(false);
-		
+		setVisible(true);
 		Login_GUI_Button.setPreferredSize(new Dimension(260, 40));
 		Login_GUI_Button.addActionListener(this);
 		Login_GUIPanel.add(NickName_Label);
@@ -95,6 +92,7 @@ class ChatClientGUI extends JFrame implements ActionListener, KeyListener {
 		CB.getUserInfo(NickName, IPAddress, Port);
 		CB.start(); // 채팅창이 켜짐과 동시에 접속을 실행해줍니다.
 	}
+	
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
