@@ -25,7 +25,7 @@ public class ServerBack extends Thread {
 	
 	public void startServer(int port) {	
 		try {
-			Collections.synchronizedList(clientList);
+			Collections.synchronizedList(clientList);	//clientList를 네트워크 처리
 			serverSocket = new ServerSocket(port);
 			System.out.println("현재 IP주소 : "+InetAddress.getLocalHost()+", Port 번호 : "+port);
 		} catch (IOException e) {
@@ -38,8 +38,8 @@ public class ServerBack extends Thread {
 			nickNameList.add("Admin");
 			while(true) {
 				System.out.println("접속 대기중...");
-				socket = serverSocket.accept();
-				System.out.println("["+socket.getInetAddress()+"]에서 접속하셨습니다!");
+				socket = serverSocket.accept();	//포트번호가 일치한 클라이언트의 소켓을 받음
+				System.out.println("["+socket.getInetAddress()+"]에서 접속하셨습니다.");
 				ReceiveInfo receive = new ReceiveInfo(socket);
 				clientList.add(receive);
 				receive.start();
@@ -50,6 +50,7 @@ public class ServerBack extends Thread {
 	}
 	
 	public void transmitAll(String message) {
+		//모든 클라이언트들에게 메세지를 전송
 		for(int i=0; i<clientList.size(); i++) {
 			try {
 				ReceiveInfo ri = clientList.elementAt(i);
@@ -61,6 +62,7 @@ public class ServerBack extends Thread {
 	}
 	
 	public void removeClient(ReceiveInfo client, String nickName) {
+		//퇴장한 유저 발생 시 목록에서 삭제
 		clientList.removeElement(client);
 		nickNameList.remove(nickName);
 		System.out.println("목록에서 "+nickName+"을(를) 제거하였습니다.");
@@ -70,6 +72,7 @@ public class ServerBack extends Thread {
 	}
 	
 	class ReceiveInfo extends Thread {
+		//각 클리어언트로부터 소켓을 받아 다시 내보내는 역할
 		private DataInputStream in;
 		private DataOutputStream out;
 		String nickName;
@@ -89,14 +92,17 @@ public class ServerBack extends Thread {
 		@Override
 		public void run() {
 			try {
+				//새로운 유저 발생 시 유저 목록 초기화
+				//후에 새롭게 유저 목록 입력
+				//새로운 유저가 입장했음을 모든 클라이언트에게 전송
 				serverChatGUI.userList.setText(null);
 				serverChatGUI.appendUserList(nickNameList);
-				transmitAll(nickName+"님이 입장하셨습니다!\n");
+				transmitAll(nickName+"님이 입장하셨습니다.\n");
 				
 				for(int i=0; i<nickNameList.size(); i++) {
 					transmitAll("+++닉네임의시작+++"+nickNameList.get(i));
 				}
-				serverChatGUI.appendMessage(nickName+"님이 입장하셨습니다!\n");
+				serverChatGUI.appendMessage(nickName+"님이 입장하셨습니다.\n");
 				
 				while(true) {
 					message = in.readUTF();	//readLine -> 한글깨짐
@@ -111,11 +117,12 @@ public class ServerBack extends Thread {
 				for(int i=0; i<nickNameList.size(); i++) {
 					transmitAll("+++닉네임의시작+++"+nickNameList.get(i));
 				}
-				serverChatGUI.appendMessage(nickName+"님이 퇴장하셨습니다!\n");
+				serverChatGUI.appendMessage(nickName+"님이 퇴장하셨습니다.\n");
 			}
 		}
 		
 		public void transmitAll(String message) {
+			//메세지(전달 내용)를 각 클라이언트의 쓰레드에 전송
 			try {
 				out.writeUTF(message);
 				out.flush();
