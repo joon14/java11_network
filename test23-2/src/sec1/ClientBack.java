@@ -28,7 +28,7 @@ public class ClientBack extends Thread {
 	public void setGui(ChatClientGUI chatgui) {
 		this.chatgui = chatgui;
 	}
-
+	
 	@Override
 	public void run() {
 		try {
@@ -65,7 +65,7 @@ public class ClientBack extends Thread {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	
 	public void Transmit(String Message) {
 		//입력받은 값을 서버로 전송
 		try {
